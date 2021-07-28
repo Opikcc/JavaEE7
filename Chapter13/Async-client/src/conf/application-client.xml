@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application-client version="7" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application-client_7.xsd">
+  <display-name>Async-client</display-name>
+  <env-entry>
+            <description>Title of window</description>
+            <env-entry-name>window-title</env-entry-name>
+            <env-entry-type>java.lang.String</env-entry-type>
+            <env-entry-value>ACME Prime Calculator</env-entry-value>
+        </env-entry>
+</application-client>

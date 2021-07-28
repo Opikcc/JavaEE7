@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Asynchronous servlet</title>
+    </h:head>
+    <h:body style="font-family:Palatino;font-size:small">
+        <br></br><br></br>
+        <div align='center'>
+            <h:form>
+                Press the thunderbolt to invoke the asynchronous servlet
+                <br></br>
+                <h:commandButton 
+                    id="async_button" 
+                    value="Call async servlet" 
+                    image="lightening_sm.png"
+                    onclick="window.open('LockedServlet', '_blank', 'height=300,width=275')"/>
+                <br></br><br></br>
+                Press the padlock to unlock the asynchronous servlet
+                <br></br>
+                <h:commandButton 
+                    id="upload_button" 
+                    value="Unlock async servlet" 
+                    image="unlock_sm.png"
+                    action="#{application.setAttribute('lock', 'unlocked')}"/>
+            </h:form>
+        </div>
+    </h:body>
+</html>

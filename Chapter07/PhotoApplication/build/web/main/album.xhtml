@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Photo Viewer</title>
+    </h:head>
+    <h:body style="font-family:Palatino;font-size:small">
+        <div align='center'>
+            <h3>Welcome #{securityBean.username}</h3>
+        <br></br>
+        <table bgcolor="99CC99" cellspacing="4">
+            <tbody>
+                <tr>
+                    <c:forEach items="#{photoAlbum.photos}" var="photo">
+                        <td>
+                        <div align='center'>
+                                #{photo.name}
+                        </div>
+                        </td>
+                    </c:forEach>
+                </tr>     
+            <tr>
+                <c:forEach items="#{photoAlbum.photos}" var="photo">
+                    <td>
+                        <h:form>
+                            <h:graphicImage 
+                                height="200" 
+                                width="200" 
+                                value="#{photo.viewUri}"/>      
+                        </h:form>
+
+                        <h:form>
+                            <div align='right'>
+                               
+                            <h:commandButton 
+                                title="view" 
+                                image="../view.png" 
+                                actionListener="#{photoAlbum.setCurrentPhoto(photo)}" 
+                                action="photo"/> 
+                            <c:if test="#{securityBean.userAbleToEdit}"> 
+                                <h:commandButton 
+                                    title="edit" 
+                                    image="../edit.png" 
+                                    actionListener="#{editPhotoBean.setPhoto(photo)}" 
+
+                                    action="edit/edit"/> 
+                                <h:commandButton 
+                                    title="delete" 
+                                    image="../delete.png" 
+                                    action="#{photoAlbum.removePhoto(photo)}"/> 
+                            </c:if>
+                            </div>
+                        </h:form>
+
+                    </td>
+                </c:forEach>
+  
+            </tr>
+                </tbody>
+        </table>
+            <br></br>
+            <c:if test="#{securityBean.userAbleToEdit}">
+                <h:form>
+                    <h:commandButton 
+                        id="upload_button" 
+                        value="Upload photos" 
+                        onclick="window.open('edit/upload.xhtml')"/>
+                </h:form>
+            </c:if>
+            <c:if test="#{securityBean.loggedIn}">
+                <h:form>
+                    <h:commandButton 
+                        id="logout_button" 
+                        value="Logout"
+                        actionListener="#{securityBean.logout()}" 
+                        onclick="window.open('../index.xhtml')"/>
+                </h:form>
+            </c:if>
+        </div>
+    </h:body>
+</html>
+

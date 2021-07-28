@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Monitor</title>
+        <script language="javascript" type="text/javascript">
+            var websocket;
+            var last_time;
+            
+            function init() {
+                output = document.getElementById("output");
+                start_listening();
+            }
+
+            function start_listening() {
+                var wsUri = "ws://localhost:8080/MonitoredPrimeCalculator/progress";
+                websocket = new WebSocket(wsUri);
+                websocket.onmessage = function (evt) {
+                    last_time = evt.data;
+                    handleMessage(last_time); 
+                };
+                websocket.onerror = function (evt) {
+                    handleMessage('<span style="color: red;">ERROR:</span> ' + evt.data);
+                    websocket.close();
+                }; 
+            }
+            
+            function doClear() {
+                doClearElement(output);
+                doClearElement(sequential);
+                doClearElement(concurrent);
+            }
+            
+            function doClearElement(myNode) {
+                j = myNode.childElementCount;
+                for (i=0; i < j; i++) {
+                    
+                    myNode.removeChild(myNode.lastChild);
+                }
+            }
+
+
+            function handleMessage(message) {
+                if (message.indexOf("x") == 0) {
+                    doClear();
+                    return;
+                }
+                var nodeToAppend;
+                if (message.indexOf("c") == 0) {
+                    nodeToAppend = concurrent;
+                } 
+                if (message.indexOf("s") == 0) {
+                    nodeToAppend = sequential;
+                }
+                if (message.indexOf("s") != 0 && message.indexOf("c") != 0) {
+                    nodeToAppend = output
+                }
+                
+                var pre = document.createElement("div");
+                pre.style.wordWrap = "break-word";
+                pre.innerHTML = message.substr(1, message.length);
+                nodeToAppend.appendChild(pre);
+                
+            }
+            window.addEventListener("load", init, false);
+            window.onbeforeunload = function(event) {
+                websocket.close();
+            };
+            
+        </script>
+    </head>
+    <body>
+        <div style="text-align: center;font-family:Palatino">
+            <img src='Monitor.png' height='50' width='50'/>
+             <br></br>
+                
+            <div style="font-weight:bold" id="output"></div>
+            <br></br>
+            <table align='center' bgcolor="#ffcc99" cellpadding="15">
+                <tr>
+                    <td valign="top" ><div style="font-weight:bold">Sequential Calculations</div><div id="sequential"></div></td>
+                    <td valign="top"><div style="font-weight:bold">Concurrent Calculations</div><div id="concurrent"></div></td>
+                </tr>
+            </table>
+            
+            
+        </div>
+        
+    </body>
+</html>

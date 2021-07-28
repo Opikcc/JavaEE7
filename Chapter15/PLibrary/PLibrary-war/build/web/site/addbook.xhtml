@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <title>Library Service</title>
+    </h:head>
+    <h:body style="font-weight:bold;font-family:Palatino">
+        <div align='center'>
+            <h1> Add book page </h1>
+                 <br></br>
+        <img src="AddBook.png"/>
+        <br></br><br></br>
+        <table>
+            <tr><td align='left'>
+            <h:form>
+                Title: <h:inputText value="#{addBookBean.title}"></h:inputText>
+                <br></br><br></br>
+                Author: <h:selectOneMenu value="#{addBookBean.authorId}">
+                    <f:selectItems value="#{libraryBean.authors}" var="author" itemLabel="#{author.lastName}" itemValue="#{author.id}">
+                    </f:selectItems>
+            
+                    
+                </h:selectOneMenu>
+                <h:commandButton value="Add Author" action="addauthor"></h:commandButton>
+                <br></br><br></br>
+                Genres: <h:selectOneMenu value="#{addBookBean.genreName1}">
+                    <f:selectItems value="#{libraryBean.genreNames}" />
+                </h:selectOneMenu> 
+                <h:selectOneMenu value="#{addBookBean.genreName2}">
+                    <f:selectItems value="#{libraryBean.genreNames}" />
+                </h:selectOneMenu>
+                <br></br><br></br>
+                Is this a Children's book ? 
+                <h:selectBooleanCheckbox value="#{addBookBean.childrensBook}"  />
+                
+                    Target Age:
+                    <h:selectOneMenu value="#{addBookBean.age}">
+                        <f:selectItems value="#{addBookBean.ages}" />
+                    </h:selectOneMenu>
+                
+                
+                <br></br><br></br>
+                <h:commandButton value="Cancel" action="books"></h:commandButton>
+                <h:commandButton value="Submit" actionListener="#{addBookBean.add()}" action="books"></h:commandButton>
+            </h:form>
+        </td></tr></table>
+        </div>
+    </h:body>
+</html>
+

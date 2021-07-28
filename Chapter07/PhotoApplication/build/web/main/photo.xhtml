@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Detail</title>
+    </h:head>
+    <h:body style="font-family:Palatino;font-size:small">
+        <div align='center'>
+            <h3>Details for #{photoAlbum.currentPhoto.name}</h3>
+        <table bgcolor="FFFF99" cellspacing="4"><tbody>
+            <tr><td align='center'>
+                <h:graphicImage 
+                    height="330" 
+                    width="330" 
+                    value="#{photoAlbum.currentPhoto.viewUri}"/>
+            </td></tr>
+            <tr><td align='center'>
+                    <label>Called #{photoAlbum.currentPhoto.name}</label>
+            </td></tr>    
+            <tr><td align='center'>
+                    <label>Taken on #{photoAlbum.currentPhoto.dateTaken}</label>
+            </td></tr>
+            
+            <tr><td align='center'>
+                <label>
+                    <c:if test="#{photoAlbum.currentPhoto.public}">
+                        Everyone can see this photo
+                    </c:if>
+                    <c:if test="#{not photoAlbum.currentPhoto.public}">
+                        Only you can see this photo
+                    </c:if>
+                    
+                </label>
+            </td></tr> 
+            <tr><td align='center'>
+                    <label>Uploaded as #{photoAlbum.currentPhoto.filename}</label>
+            </td></tr>    
+            <tr><td align='right'> 
+                    <c:if test="#{securityBean.userAbleToEdit}">
+                    <h:form>
+                        <h:commandButton 
+                            title="edit" 
+                            image="../edit.png" 
+                            actionListener="#{editPhotoBean.setPhoto(photoAlbum.currentPhoto)}" 
+                            action="edit/edit"/> 
+                    </h:form>
+                </c:if>
+            </td></tr>  
+            <tr><td align='center'> 
+                
+            </td></tr>         
+        </tbody></table>
+            <br></br>
+            <h:form>
+                <h:commandButton value ="Back" action="album"/> 
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

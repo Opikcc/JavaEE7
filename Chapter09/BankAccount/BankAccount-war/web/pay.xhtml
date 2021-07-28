@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Pay</title>
+    </h:head>
+    #{accountBean.reset()}
+    <h:body style="font-family:Palatino">
+        <div align='center'>
+            <h1> Enterprise Bank </h1>
+                 Make payment
+                 <br></br>
+        <img src="Money-icon.png"/>
+        <br></br>
+        <br></br>
+        <h:form>
+        <table width="350">
+            <tr>
+                <td>
+                    Payee
+                </td>
+                <td>
+                    Amount
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h:selectOneMenu value="#{accountBean.currentPayee}"  onchange="submit()">
+                        <f:selectItems value="#{accountBean.payees}" />
+                    </h:selectOneMenu>
+                </td>
+                <td>
+                    <h:inputText  onchange="submit()" value="#{accountBean.amount}"> 
+                        <f:convertNumber currencyCode="USD" type="currency" />
+                    </h:inputText>
+                </td>
+                <td>
+                    <h:commandButton action="confirm" value="Submit Payment"/>
+                </td>
+            </tr>
+        </table>
+        </h:form>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Enterprise Bank</title>
+    </h:head>
+    <h:body style="font-family:Palatino">
+        <div align='center'>
+            <h1> Enterprise Bank </h1>
+                 Your accounts
+                 <br></br>
+        <img src="piggy-bank-icon.png"/>
+        <br></br>
+        <br></br>
+        <table width="350">
+            <tr>
+                <td>
+                    Account Number
+                </td>
+                <td>
+                    Balance
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    
+                    #{accountBean.checkingAccountNumber}
+                </td>
+                <td>
+                    <h:outputText value="#{accountBean.checkingBalance}">
+                        <f:convertNumber currencyCode="USD" type="currency" />
+                    </h:outputText>
+                    
+                </td>
+            </tr>
+        </table>
+        <h:form>
+            <h:commandButton action='pay' value="Make Payments"/>
+        </h:form>
+         
+        </div>
+    </h:body>
+</html>
+

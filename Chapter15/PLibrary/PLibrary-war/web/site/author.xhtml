@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <title>Library Service</title>
+    </h:head>
+    <h:body style="font-weight:bold;font-family:Palatino">
+        <div align='center'>
+            <h1> Author page </h1>
+                 <br></br>
+        <img src="Writer.png"/>
+        <br></br><br></br>
+        
+        
+        All about 
+        
+        <c:forEach var="name" items="#{libraryBean.currentAuthor.foreNames}">
+            #{name}
+        </c:forEach>
+        
+        #{libraryBean.currentAuthor.lastName}
+        
+        <br></br><br></br>
+        <div style="font-weight:normal;font-family:Palatino">
+        #{libraryBean.currentAuthor.description}
+        </div>
+        <br></br><br></br>
+        #{libraryBean.currentAuthor.lastName}'s current collection:
+        <div style="font-weight:normal;font-family:Palatino">
+        <c:forEach var="book" items="#{libraryBean.getBooksBy(libraryBean.currentAuthor)}">
+            <br/><br/>
+            #{book.title}
+            
+        </c:forEach>
+        </div>
+        <br/><br/>
+        <h:form>
+            <h:link value="Return to category #{libraryBean.currentGenreName}" outcome="books" >
+                            
+            </h:link>
+                    </h:form>
+        
+        </div>
+    </h:body>
+</html>
+

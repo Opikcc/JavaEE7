@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Photo Viewer</title>
+    </h:head>
+    <h:body style="font-family:Palatino;font-size:small">
+        <div align='center'>
+            <h3>Group Photo Album</h3>
+            
+            <c:if test="#{photoAlbum.viewerCount == 2}">
+                one other person is viewing this album
+            </c:if>
+            <c:if test="#{photoAlbum.viewerCount != 2}">
+                #{photoAlbum.viewerCount - 1} other people are viewing this album
+            </c:if>
+        <br></br>    
+        <br></br>
+        <table bgcolor="99CC99" cellspacing="4">
+            <tbody>
+                <tr>
+                    <c:forEach items="#{photoAlbum.photos}" var="photo">
+                        <td>
+                        <div align='center'>
+                                #{photo.name}
+                        </div>
+                        </td>
+                    </c:forEach>
+                </tr>     
+            <tr>
+                <c:forEach items="#{photoAlbum.photos}" var="photo">
+                    <td>
+                        <h:form>
+                            <h:graphicImage 
+                                height="200" 
+                                width="200" 
+                                value="#{photo.viewUri}"/>      
+                        </h:form>
+                        <h:form>
+                            <div align='right'>
+                            <h:commandButton 
+                                title="view" 
+                                image="view.png" 
+                                actionListener="#{photoAlbum.setCurrentPhoto(photo)}" 
+                                action="photo"/> 
+                            <h:commandButton 
+                                title="edit" 
+                                image="edit.png" 
+                                actionListener="#{editPhotoBean.setPhoto(photo)}" 
+                                action="edit"/> 
+                            <h:commandButton 
+                                title="delete" 
+                                image="delete.png" 
+                                action="#{photoAlbum.removePhoto(photo)}"/> 
+                            </div>
+                        </h:form>
+                    </td>
+                </c:forEach>
+  
+            </tr>
+                </tbody>
+        </table>
+            <br></br>
+            <h:form>
+                <h:commandButton 
+                    id="upload_button" 
+                    value="Upload photos" 
+                    action="upload"/>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Concurrent Prime Calculator</title>
+    </h:head>
+    <h:body style = 'font-family:Palatino'>
+        <div style="font-weight: bold" align="center">
+            <img src="bulb.png" width="50" height="50"/>
+            <h:form >
+                Number of calculations: 
+                <h:selectOneMenu value="#{concurrencyBean.numberCalculations}" >
+                    <f:selectItem itemValue="1" itemLabel="1" />
+                    <f:selectItem itemValue="2" itemLabel="2" />
+                    <f:selectItem itemValue="5" itemLabel="5" />
+                    <f:selectItem itemValue="10" itemLabel="10" />
+                    <f:selectItem itemValue="25" itemLabel="25" />
+                    <f:selectItem itemValue="50" itemLabel="50" />
+                </h:selectOneMenu>
+                <br></br>
+                Maximum upper bound: 
+                <h:selectOneMenu value="#{concurrencyBean.maxUpperBound}"  >
+                    <f:selectItem itemValue="1000" itemLabel="1000" />
+                    <f:selectItem itemValue="20000" itemLabel="20000" />
+                    <f:selectItem itemValue="50000" itemLabel="50000" />
+                    <f:selectItem itemValue="100000" itemLabel="100000" />
+                </h:selectOneMenu>
+            
+                <br></br>
+                <h:commandButton value="Calculate" actionListener="#{concurrencyBean.doCalculate()}" action="index" />
+            </h:form>
+            
+            <br></br>
+            <form>
+                <input 
+                    onclick="window.open('monitor.html', 'new', 'height=700,width=600;')" 
+                    title="Monitor" 
+                    value="Monitor"
+                    type="button"/>
+            </form>
+            <br></br>
+            <br></br>
+            
+            <table bgcolor="#ffffdd" cellpadding="15"><tr><td>
+                        <div align="center" >
+                            Results
+                        </div>
+            <br></br>
+            
+            <h:dataTable style="font-weight:normal;font-family:Palatino" value="#{concurrencyBean.upperBounds}" var="ub">
+                <h:column>
+                    <f:facet name="header">Upper Bound</f:facet>
+                    #{ub}
+                    <f:facet name="footer"></f:facet>
+                </h:column>
+                
+                <h:column rowHeader="Time taken = #{concurrencyBean.lastSequentialTime}">
+                    <f:facet name="header">Sequential</f:facet>
+                    #{concurrencyBean.sequentialResults.get(concurrencyBean.upperBounds.indexOf(ub))}
+                    <f:facet name="footer"></f:facet>
+                </h:column>
+                
+                <h:column rowHeader="Time taken = #{concurrencyBean.lastSequentialTime}">
+                    <f:facet name="header">Parallel</f:facet>
+                    #{concurrencyBean.parallelResults.get(concurrencyBean.upperBounds.indexOf(ub))}
+                </h:column>
+
+            </h:dataTable>
+            
+            <br></br>
+            <br></br>
+            Sequential calculation took #{concurrencyBean.lastSequentialTime}ms. 
+            <br></br>
+            Concurrent calculation took #{concurrencyBean.lastParallelTime}ms.
+                    </td></tr></table>          
+ 
+        </div>
+    </h:body>
+</html>
+

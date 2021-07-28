@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.10.8
+Created-By: 15.0.1+9-18 (Oracle Corporation)
+X-COMMENT: Main-Class will be added automatically by build
+Class-Path: javaee-api-7.0.jar lib/javaee-api-7.0.jar 
+Main-Class: javaeems.chapter9.backoffice.client.Main
+
